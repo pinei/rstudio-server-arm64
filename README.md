@@ -1,12 +1,12 @@
 # rstudio-server-arm64
-Compiles rstudio server 1.1 and R 3.6.3 for the arm64 platform / tested on a raspberry pi 4 with 4gb ram
+Compiles RStudio Server (Workbanch) 1.4 and R 4.1.1 for the ARM64 platform / tested on a Raspberry Pi 4 with 4GB ram
 
-to compile from source clone this repository then run
+To compile from source clone this repository then run
 
-    docker build -tag armrstudio . && docker run -d -p8787:8787 armrstudio
+    docker build -tag rstudio-server . && docker run -d -p 8787:8787 rstudio-server
 
-there is also a precompiled arm64 version available on hub.docker.com
+There will be also a precompiled ARM64 version available on hub.docker.com
   
-    docker run -d -p8787:8787 fdewes/rstudio-server-arm64:R3
+    docker run -d -p8787:8787 pinei/rstudio-server:1.4
 
 user / pass: rstudio
