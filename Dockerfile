@@ -53,7 +53,9 @@ ENV RSTUDIO_VERSION_MAJOR=1
 ENV RSTUDIO_VERSION_MINOR=4
 
 RUN git clone --depth 1 --branch v1.4.1717 https://github.com/rstudio/rstudio
-RUN cd rstudio
+
+# Point to node-v14.17.5-linux-arm64.tar.gz
+RUN sed -i 's/linux-x64/linux-arm64/' rstudio/dependencies/common/install-npm-dependencies
 
 RUN echo "#!/usr/bin/env bash" > rstudio/dependencies/common/install-pandoc
 RUN chmod +x rstudio/dependencies/common/install-pandoc
