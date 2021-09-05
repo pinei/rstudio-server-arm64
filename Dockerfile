@@ -44,7 +44,7 @@ RUN apt-get install -y git \
 # build R 4.1.1 from source
 	
 RUN wget https://cran.uni-muenster.de/src/base/R-4/R-4.1.1.tar.gz
-RUN tar zxvf R-4.1.1.tar.gz
+RUN tar zxvf R-4.1.1.tar.gz && rm R-4.1.1.tar.gz
 RUN cd R-4.1.1 && ./configure --enable-R-shlib && make && make install
 
 # R Studio
@@ -56,6 +56,11 @@ RUN git clone --depth 1 --branch v1.4.1717 https://github.com/rstudio/rstudio
 
 # Point to node-v14.17.5-linux-arm64.tar.gz
 RUN sed -i 's/linux-x64/linux-arm64/' rstudio/dependencies/common/install-npm-dependencies
+
+# Point to pandoc-2.14.2-linux-arm64.tar.gz
+# https://github.com/jgm/pandoc/releases/download/2.14.2/pandoc-2.14.2-linux-arm64.tar.gz
+RUN sed -i 's/https:\/\/s3.amazonaws.com\/rstudio-buildtools\/pandoc/https:\/\/github.com\/jgm\/pandoc\/releases\/download/' rstudio/dependencies/common/install-pandoc
+RUN sed -i 's/linux-amd64/linux-arm64/' rstudio/dependencies/common/install-pandoc
 
 RUN echo "#!/usr/bin/env bash" > rstudio/dependencies/common/install-pandoc
 RUN chmod +x rstudio/dependencies/common/install-pandoc
